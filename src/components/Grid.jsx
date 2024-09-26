@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 const SOCKET_DETAILS = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 // const SOCKET_DETAILS =  "http://localhost:5000";
 const socket = io(SOCKET_DETAILS);
-console.log(SOCKET_DETAILS)
+// console.log(SOCKET_DETAILS)
 
 const Grid = () => {
   const [grid, setGrid] = useState(
