@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
       // Track the history of updates
       updateHistory.push({ x, y, character, timestamp });
 
-      // Broadcast the updated grid and history to all players
+      // updated grid and history to all players
       io.emit("gridUpdate", grid);
       io.emit("updateHistory", updateHistory);
     }
