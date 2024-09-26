@@ -90,7 +90,7 @@ const Grid = () => {
       </div>
 
       {/* Rules Section */}
-      <div className="px-4 text-white">
+      <div className="px-4 md:px-14 text-white">
         <h2 className="text-3xl font-bold mb-4">Game Rules</h2>
         <ul className="text-lg list-disc pl-6 space-y-2">
           <li className="text-yellow-400 font-semibold">
