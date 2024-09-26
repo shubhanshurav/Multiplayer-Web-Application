@@ -2,6 +2,15 @@
 
 This is a multiplayer web application where players can select and update a block with a Unicode character on a 10x10 grid. The grid is updated in real-time for all connected players. Once a player submits a character, they are restricted from playing again for 1 minute. Players can also see a history of updates made to the grid. The player count is shown at the top.
 
+## Screenshots
+
+<p align="center" >
+<h6>Desktop/Laptop</h6>
+  <img src="https://github.com/user-attachments/assets/7993b359-beab-4737-8451-719ada9a4f13" alt="Grid Screenshot" width="85%" />
+<h6>Smartphone</h6>
+  <img src="https://github.com/user-attachments/assets/164c08fd-6646-4040-bf25-2a43bdb3fe4f" alt="Players Online Screenshot" width="14%" />
+</p>
+
 ## Features
 - **Real-Time Grid Updates**: The grid is updated in real-time for all players.
 - **Player Count**: Displays the number of players currently online.
