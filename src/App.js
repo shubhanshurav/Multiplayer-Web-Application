@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./index.css";
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+const socket = io("https://multiplayer-web-application.onrender.com");
 
 const App = () => {
   const [grid, setGrid] = useState(
@@ -9,6 +10,8 @@ const App = () => {
       .fill(null)
       .map(() => Array(10).fill(null))
   );
+
+  console.log("socket", socket)
   const [playerCount, setPlayerCount] = useState(0);
   const [hasPlayed, setHasPlayed] = useState(false);
 
