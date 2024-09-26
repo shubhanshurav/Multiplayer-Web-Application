@@ -1,45 +1,54 @@
 const express = require("express");
 const http = require("http");
+const { Server } = require("socket.io");
 const cors = require("cors");
-const socketIO = require("socket.io");
+
+const PORT = 5000;
 
 const app = express();
-app.use(cors());
-
 const server = http.createServer(app);
-const io = socketIO(server, {
+const io = new Server(server, {
   cors: {
     origin: "*",
+    methods: ["GET", "POST"],
   },
 });
 
-const PORT = process.env.PORT || 5000;
+app.use(cors());
 
 let grid = Array(10)
-  .fill(null)
-  .map(() => Array(10).fill(null)); // Initialize empty 10x10 grid
-let onlinePlayers = 0;
+  .fill()
+  .map(() => Array(10).fill(null));
+let playerCount = 0;
+let updateHistory = [];
 
 io.on("connection", (socket) => {
-  onlinePlayers++;
-  io.emit("updatePlayerCount", onlinePlayers);
+  playerCount++;
+  io.emit("playerCount", playerCount);
 
-  // Send the current grid state to the new player
-  socket.emit("initializeGrid", grid);
+  socket.emit("gridUpdate", grid);
+  socket.emit("updateHistory", updateHistory);
 
-  socket.on("submitCharacter", ({ row, col, character }) => {
-    if (!grid[row][col]) {
-      grid[row][col] = character;
-      io.emit("updateGrid", { row, col, character });
+  socket.on("updateGrid", ({ x, y, character }) => {
+    if (!grid[x][y]) {
+      const timestamp = new Date().toLocaleTimeString();
+      grid[x][y] = character;
+
+      // Track the history of updates
+      updateHistory.push({ x, y, character, timestamp });
+
+      // Broadcast the updated grid and history to all players
+      io.emit("gridUpdate", grid);
+      io.emit("updateHistory", updateHistory);
     }
   });
 
   socket.on("disconnect", () => {
-    onlinePlayers--;
-    io.emit("updatePlayerCount", onlinePlayers);
+    playerCount--;
+    io.emit("playerCount", playerCount);
   });
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on ${PORT}`);
 });

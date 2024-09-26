@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 
-body {
-  @apply bg-gray-800;
-}
-
-.grid-container {
+.grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 8px;
+}
+.grid div {
+  height: 40px;
+  width: 40px;
+  border-radius: 4px;
 }
