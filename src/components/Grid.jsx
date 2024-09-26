@@ -55,10 +55,18 @@ const Grid = () => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen items-center bg-gray-900">
+    <div className="flex md:flex-row flex-col justify-center min-h-screen items-center bg-gray-900">
       {/* Grid Section */}
-      <div className="flex flex-col items-center">
-        <div className="text-white mb-4">Players online: {playerCount}</div>
+      <div className="flex flex-col pb-6 md:pb-2 items-center">
+        <h1 className="font-extrabold text-white text-3xl py-2 border-b-4">
+          Multiplayer 10 X 10 Game
+        </h1>
+        <div className="text-white font-medium mb-4 pt-5">
+          <span className="font-bold text-xl text-green-600">
+            Players online:
+          </span>{" "}
+          {playerCount}
+        </div>
         <div className="grid grid-cols-10 gap-2">
           {grid.map((row, rowIndex) =>
             row.map((block, colIndex) => (
@@ -66,7 +74,7 @@ const Grid = () => {
                 key={`${rowIndex}-${colIndex}`}
                 className={`w-10 h-10 flex items-center justify-center border border-gray-600 
                   ${block ? "bg-green-500" : "bg-gray-700"} 
-                  cursor-pointer text-white`}
+                  cursor-pointer font-medium text-white`}
                 onClick={() => handleBlockClick(rowIndex, colIndex)}
               >
                 {block || ""}
@@ -75,21 +83,31 @@ const Grid = () => {
           )}
         </div>
         {!canPlay && (
-          <div className="text-red-500 mt-4">
+          <div className="font-medium text-red-600 mt-4">
             You can update again in: {timeRemaining} seconds
           </div>
         )}
       </div>
 
       {/* Rules Section */}
-      <div className="ml-10 text-white">
+      <div className="px-4 text-white">
         <h2 className="text-3xl font-bold mb-4">Game Rules</h2>
         <ul className="text-lg list-disc pl-6 space-y-2">
-          <li className="text-yellow-400 font-semibold">Select any block only once.</li>
-          <li className="text-blue-400 font-semibold">Input any Unicode character.</li>
-          <li className="text-green-400 font-semibold">Once a block is filled, it cannot be changed.</li>
-          <li className="text-red-400 font-semibold">Grid updates in real-time for all players.</li>
-          <li className="text-purple-400 font-semibold">Player count is shown at the top.</li>
+          <li className="text-yellow-400 font-semibold">
+            Select any block only once.
+          </li>
+          <li className="text-blue-400 font-semibold">
+            Input any Unicode character.
+          </li>
+          <li className="text-green-400 font-semibold">
+            Once a block is filled, it cannot be changed.
+          </li>
+          <li className="text-red-400 font-semibold">
+            Grid updates in real-time for all players.
+          </li>
+          <li className="text-purple-400 font-semibold">
+            Player count is shown at the top.
+          </li>
         </ul>
 
         {/* History Section */}
